@@ -1,0 +1,34 @@
+def calculate_net_salary(gross, children):
+    tax_rate = 0
+    if gross < 1000:
+        tax_rate = 10
+    elif gross < 2000:
+        tax_rate = 12
+    elif gross < 4000:
+        tax_rate = 14
+    else:
+        tax_rate = 18
+
+    # Adjusting tax rate based on number of children
+    if gross < 2000:
+        tax_rate -= children * 1
+    else:
+        tax_rate -= children * 0.5
+
+    # Ensuring tax rate doesn't go negative
+    tax_rate = max(tax_rate, 0)
+
+    net_salary = gross - (gross * tax_rate / 100)
+    return net_salary
+
+def main():
+    try:
+        gross_salary = float(input("Enter gross salary: "))
+        children = int(input("Enter number of children: "))
+        net_salary = calculate_net_salary(gross_salary, children)
+        print(f"Net Salary: {net_salary}")
+    except ValueError:
+        print("Invalid input. Please enter a valid number.")
+
+if __name__ == "__main__":
+    main()
